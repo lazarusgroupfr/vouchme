@@ -1,148 +1,166 @@
-body {
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('myfont.ttf') format('truetype');
+}
+
+body, html {
   margin: 0;
-  background-color: #000;
-  color: #fff;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   font-family: Arial, sans-serif;
+}
+
+/* INTRO */
+#soundGate {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-.profile-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.profile-pic {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: #333;
-  margin-bottom: 16px;
-  transition: transform 0.3s ease;
-}
-.profile-pic:hover {
-  transform: scale(1.1);
-}
-
-.username {
-  font-size: 24px;
-  margin-bottom: 8px;
-  position: relative;
-  transition: color 0.3s ease;
-}
-.username:hover {
-  color: #7c3aed;
-}
-
-.vouch-count {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 6px;
-  margin-left: 6px;
-  color: #fff;
-  transition: transform 0.3s ease;
-}
-.vouch-count:hover {
-  transform: scale(1.1);
-}
-.vouch-count.up {
-  background-color: green;
-}
-.vouch-count.down {
-  background-color: red;
-  margin-left: 4px;
-}
-
-.made-by {
-  margin-top: 8px;
-  font-size: 14px;
-  color: #777;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
-}
-.made-by:hover {
-  color: #9d64ff;
-}
-
-.add-btn {
-  margin-bottom: 32px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: #7c3aed;
-  color: white;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.add-btn:hover {
-  background-color: #9d64ff;
-  transform: scale(1.05);
+  z-index: 20;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
 }
 
-.vouch {
+/* VIDEO */
+.background-video {
+  position: fixed;
+  inset: 0;
   width: 100%;
-  max-width: 400px;
-  padding: 12px;
-  margin-bottom: 12px;
-  background-color: #111;
-  border-radius: 8px;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: blur(4px) brightness(0.7);
+}
+
+/* CARD */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  width: 420px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+}
+
+/* PFP */
+.pfp {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+/* USERNAME */
+.username {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: 'MyCustomFont', Arial;
+  text-shadow: 0 0 5px #fff, 0 0 8px #fff;
+}
+
+/* BADGES */
+.badges {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-.vouch:hover {
-  transform: translateY(-5px);
-  background-color: #1a1a1a;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
 }
 
-.vouch-username {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.vouch-message {
-  font-size: 16px;
-  flex: 1;
-}
-
-.vouch-icon {
-  color: green;
-  font-size: 18px;
+.badge-img {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
   transition: transform 0.3s ease;
 }
-.vouch:hover .vouch-icon {
-  transform: rotate(15deg);
+
+.badge:hover .badge-img {
+  transform: scale(1.15);
 }
 
-.notification {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%) scale(0.9);
-  background: #222;
-  color: #fff;
-  padding: 14px 22px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  font-size: 15px;
-  transition: all 0.4s ease;
-  z-index: 999;
+/* Tooltip */
+.badge {
+  position: relative;
 }
-.notification.show {
+
+.badge-notif {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.badge:hover .badge-notif {
   opacity: 1;
-  transform: translateX(-50%) scale(1);
+}
+
+/* BIO ANIMÉE */
+.bio {
+  opacity: 0.85;
+  margin: 15px 0;
+  font-size: 15px;
+  font-family: 'MyCustomFont', Arial;
+  min-height: 20px;
+}
+
+/* LOCATION */
+.location {
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+.icon {
+  width: 20px;
+  margin-right: 5px;
+}
+
+/* ICÔNE STEAM PETITE (COMME AVANT) */
+.icon-big {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.icons a {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.icons a:hover .icon-big {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+/* FOOTER */
+.footer {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  opacity: 0.7;
 }
